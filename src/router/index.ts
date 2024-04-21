@@ -1,5 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import PatientsListView from '@/views/PatientsListView.vue'
+import AppointmentsListView from '@/views/AppointmentsListView.vue'
+import MedicalRecordsListView from '@/views/MedicalRecordsListView.vue'
+import UserListView from '@/views/UserListView.vue'
+import HomeView from '@/views/HomeView.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,17 +12,32 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+      meta: { requiresAuth: true } // Indica que esta ruta requiere autenticación
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
+      path: '/patients',
+      name: 'patientList',
+      component: PatientsListView
+    },
+    {
+      path: '/appointments',
+      name: 'appointmentList',
+      component: AppointmentsListView
+    },
+    {
+      path: '/medicalRecords',
+      name: 'medicalRecordList',
+      component: MedicalRecordsListView
+    },
+    {
+      path: '/users',
+      name: 'user',
+      component: UserListView
     }
   ]
 })
 
+
 export default router
+
