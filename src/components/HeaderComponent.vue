@@ -1,7 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useLoginStore } from '@/stores/loginStore';
 
 const drawer = ref(false)
+const { getRole } = useLoginStore();
+const role = getRole();
 
 const toggleDrawer = () => {
   drawer.value = !drawer.value
@@ -12,7 +15,8 @@ const items = [
   { text: 'Pacientes', to: '/patients' },
   { text: 'Citas', to: '/appointments' },
   { text: 'Historial médico', to: '/medicalRecords' },
-  { text: 'Usuarios', to: '/users' },
+  { text: 'Usuarios', to: '/users'},
+  { text: 'Login', to: '/login' }
 ]
 </script>
 

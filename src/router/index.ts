@@ -1,10 +1,6 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import PatientsListView from '@/views/PatientsListView.vue'
-import AppointmentsListView from '@/views/AppointmentsListView.vue'
-import MedicalRecordsListView from '@/views/MedicalRecordsListView.vue'
-import UserListView from '@/views/UserListView.vue'
-import HomeView from '@/views/HomeView.vue'
-
+import { createRouter, createWebHistory } from 'vue-router';
+import { createPinia } from 'pinia';
+import { useLoginStore } from '@/stores/loginStore';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,31 +8,38 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView,
-      meta: { requiresAuth: true } // Indica que esta ruta requiere autenticación
+      component: () => import('@/views/HomeView.vue') // Usa una función para cargar el componente dinámicamente
     },
     {
       path: '/patients',
       name: 'patientList',
-      component: PatientsListView
+      component: () => import('@/views/PatientsListView.vue'),
+     
     },
     {
       path: '/appointments',
       name: 'appointmentList',
-      component: AppointmentsListView
+      component: () => import('@/views/AppointmentsListView.vue')
     },
     {
       path: '/medicalRecords',
       name: 'medicalRecordList',
-      component: MedicalRecordsListView
+      component: () => import('@/views/MedicalRecordsListView.vue')
     },
     {
       path: '/users',
       name: 'user',
-      component: UserListView
+      component: () => import('@/views/UserListView.vue'),
+    },
+    { 
+      path: '/login',
+      name: 'login',
+      component: () => import('@/views/LoginView.vue')
     }
   ]
-})
+});
+
+
 
 
 export default router
