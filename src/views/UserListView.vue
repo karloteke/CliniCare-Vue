@@ -2,7 +2,7 @@
 import { useUserStore } from '@/stores/userStore'; 
 import TableUserComponent from '@/components/TableUserComponent.vue';
 
-const { users, fetchAll} = useUserStore();
+const { fetchAll} = useUserStore();
 fetchAll();
 
 </script>

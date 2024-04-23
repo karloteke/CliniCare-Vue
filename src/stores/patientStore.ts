@@ -17,7 +17,7 @@ export const usePatientStore = defineStore('patients', () => {
             console.error('Error fetching patients: ', error);
         }
     }
-    
+
     return {
         patients,
         fetchAll

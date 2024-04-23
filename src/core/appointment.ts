@@ -8,3 +8,5 @@ export interface Appointment {
     isUrgent: boolean;
     patientDni: string;
 }
+
+

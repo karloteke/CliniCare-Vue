@@ -2,7 +2,7 @@
 import { usePatientStore } from '@/stores/patientStore';
 import TablePatientComponent from '@/components/TablePatientComponent.vue';
 
-const { patients, fetchAll } = usePatientStore(); 
+const { fetchAll } = usePatientStore(); 
 fetchAll();
 
 </script>

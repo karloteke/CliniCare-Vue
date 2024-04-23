@@ -17,9 +17,11 @@ export const useAppointmentStore = defineStore('appointments', () => {
             console.error('Error fetching appointment: ', error);
         }
     }
+
     
     return {
         appointments,
         fetchAll
     };
 });
+
