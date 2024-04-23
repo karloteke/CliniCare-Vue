@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
-// import type { Login } from '@/core/login';
+
 
 export const useLoginStore = defineStore('login', () => {
     const token = ref<string | null>(localStorage.getItem('token') ?? null);
