@@ -1,14 +1,13 @@
 <script setup lang="ts">
-import { ref, onMounted} from 'vue';
+import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useLoginStore } from '@/stores/loginStore';
-// import { fetchAllUsers } from '@/views/userListViews';
-
-const username = ref(localStorage.getItem('username') || '');
-const password = ref(localStorage.getItem('password') || '');
 
 const { login, logout } = useLoginStore();
 const router = useRouter();
+
+const username = ref(localStorage.getItem('username') || '');
+const password = ref(localStorage.getItem('password') || '');
 
 async function handleLogin() {
   try {
@@ -16,7 +15,7 @@ async function handleLogin() {
     // Guardar nombre de usuario y contraseña en localStorage
     localStorage.setItem('username', username.value);
     localStorage.setItem('password', password.value);
-    router.push('/');  // Si el inicio de sesión es correcto, redirige a la página principal
+    router.push('/');  // Si el inicio de sesión es correcto, redirige a la página principal 
 
   } catch (error) {
     if (error instanceof Error) {
@@ -27,13 +26,16 @@ async function handleLogin() {
   }
 }
 
-function handleLogout() {
-    logout();
-    localStorage.removeItem('username'); // Eliminar nombre de usuario del almacenamiento local
-    localStorage.removeItem('password'); // Eliminar contraseña del almacenamiento local
-    window.location.reload(); // Recargar la página después de cerrar sesión
-   
+async function handleLogout() {
+  logout();
+  clearFormData();
 }
+
+function clearFormData() {
+  username.value = '';
+  password.value = '';
+}
+
 </script>
 
 <template>
