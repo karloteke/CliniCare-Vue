@@ -2,7 +2,7 @@
 import { useAppointmentStore } from '@/stores/appointmentStore';
 import TableAppointmentComponent from '@/components/TableAppointmentComponent.vue';
 
-const { appointments, fetchAll } = useAppointmentStore(); 
+const { fetchAll } = useAppointmentStore(); 
 
 fetchAll();
 </script>

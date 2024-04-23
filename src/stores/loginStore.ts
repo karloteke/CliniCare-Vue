@@ -42,9 +42,12 @@ export const useLoginStore = defineStore('login', () => {
     }
 
     function logout() {
-        // Limpiar el token al cerrar sesión
+        // Limpiar el token y el rol al cerrar sesión
         token.value = null;
-        localStorage.removeItem('token'); // Elimina el token del almacenamiento local
+        role.value = null;
+        localStorage.removeItem('token'); 
+        localStorage.removeItem('role');
+        window.location.reload(); 
     }
 
     function getToken() {

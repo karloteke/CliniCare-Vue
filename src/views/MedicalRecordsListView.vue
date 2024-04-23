@@ -2,7 +2,7 @@
 import { useMedicalRecordStore } from '@/stores/medicalRecordStore';
 import TableMedicalRecordComponent from '@/components/TableMedicalRecordComponent.vue';
 
-const { medicalRecords, fetchAll } = useMedicalRecordStore(); 
+const { fetchAll } = useMedicalRecordStore(); 
 
 fetchAll();
 </script>
