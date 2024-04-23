@@ -23,7 +23,8 @@ const adminMenuItems = [
   { text: 'Pacientes', icon: 'mdi-account', route: '/patients' },
   { text: 'Citas', icon: 'mdi-calendar', route: '/appointments' },
   { text: 'Historial médico', icon: 'mdi-file-document', route: '/medicalRecords' },
-  { text: 'Usuarios', icon: 'mdi-account-multiple', route: '/users' }
+  { text: 'Usuarios', icon: 'mdi-account-multiple', route: '/users' },
+  { text: 'Home', icon: 'mdi-account-multiple', route: '/' }
 ];
 
 const userMenuItems = [
