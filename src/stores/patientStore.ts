@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { reactive } from 'vue';
 import type { Patient } from '@/core/patient';
 
 export const usePatientStore = defineStore('patients', () => {
-    const patients = ref<Patient[]>([]);
+    const patients = reactive<Patient[]>([]);
 
     async function fetchAll() {
         try {
@@ -11,8 +11,8 @@ export const usePatientStore = defineStore('patients', () => {
             const patientsInfo = await response.json();
 
             console.log('Data received:', patientsInfo);
+            patients.splice(0, patients.length, ...patientsInfo); // Actualiza el array reactivo
 
-            patients.value = patientsInfo;
         } catch (error) {
             console.error('Error fetching patients: ', error);
         }

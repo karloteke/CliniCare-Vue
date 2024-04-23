@@ -1,11 +1,13 @@
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 
 export const useLoginStore = defineStore('login', () => {
     const token = ref<string | null>(localStorage.getItem('token') ?? null);
     const role = ref<string | null>(localStorage.getItem('role') ?? null);
     const errorMessage = ref<string>(''); 
+    const router = useRouter();
 
     async function login(credentials: { userName: string; password: string }) {
         try {
@@ -42,12 +44,13 @@ export const useLoginStore = defineStore('login', () => {
     }
 
     function logout() {
-        // Limpiar el token y el rol al cerrar sesión
         token.value = null;
         role.value = null;
         localStorage.removeItem('token'); 
         localStorage.removeItem('role');
-        window.location.reload(); 
+        localStorage.removeItem('username'); 
+        localStorage.removeItem('password'); 
+        router.push('/login');
     }
 
     function getToken() {
