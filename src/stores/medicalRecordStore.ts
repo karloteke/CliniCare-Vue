@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { reactive } from 'vue';
 import type { MedicalRecord } from '@/core/medicalRecord';
 
 export const useMedicalRecordStore = defineStore('medicalRecords', () => {
-    const medicalRecords = ref<MedicalRecord[]>([]);
+    const medicalRecords = reactive<MedicalRecord[]>([]);
 
     async function fetchAll() {
         try {
@@ -11,8 +11,7 @@ export const useMedicalRecordStore = defineStore('medicalRecords', () => {
             const medicalRecordsInfo = await response.json();
 
             console.log('Data received:', medicalRecordsInfo);
-
-            medicalRecords.value = medicalRecordsInfo;
+            medicalRecords.splice(0, medicalRecords.length, ...medicalRecordsInfo); // Actualiza el array reactivo
         } catch (error) {
             console.error('Error fetching medical records: ', error);
         }

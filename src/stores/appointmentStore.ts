@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { reactive } from 'vue';
 import type { Appointment } from '@/core/appointment';
 
 export const useAppointmentStore = defineStore('appointments', () => {
-    const appointments = ref<Appointment[]>([]);
+    const appointments = reactive<Appointment[]>([]);
 
     async function fetchAll() {
         try {
@@ -11,14 +11,12 @@ export const useAppointmentStore = defineStore('appointments', () => {
             const appointmentsInfo = await response.json();
 
             console.log('Data received:', appointmentsInfo);
-
-            appointments.value = appointmentsInfo;
+            appointments.splice(0, appointments.length, ...appointmentsInfo); // Actualiza el array reactivo
         } catch (error) {
             console.error('Error fetching appointment: ', error);
         }
     }
 
-    
     return {
         appointments,
         fetchAll

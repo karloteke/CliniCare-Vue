@@ -1,46 +1,77 @@
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
+import { reactive } from 'vue';
 import type { User } from '@/core/user';
-import { useLoginStore } from '@/stores/loginStore'; 
 
 export const useUserStore = defineStore('users', () => {
-    const users = ref<User[]>([]);
-    const { getToken, getRole } = useLoginStore();
+    const users = reactive<User[]>([]);
 
     async function fetchAll() {
         try {
-            const token = getToken(); // Obtiene el token del usuario
-            const role = getRole(); // Obtiene el rol del usuario
-
-            // Verifica que el usuario esté autenticado y tenga el rol adecuado
-            if (token && role === 'admin') {
-                const response = await fetch('https://localhost:7113/Users', {
-                    headers: {
-                        Authorization: `Bearer ${token}` // Incluye el token en el encabezado de autorización
-                    }
-                });
-
-                if (!response.ok) {
-                    throw new Error('No se pudo obtener la lista de usuarios');
-                }
-
-                const usersInfo = await response.json();
-
-                console.log('Data received:', usersInfo);
-
-                users.value = usersInfo;
-            } else {
-                console.error('El usuario no está autorizado para ver la lista de usuarios');
+            const response = await fetch('https://localhost:7113/Users');
+            if (!response.ok) {
+                throw new Error('No se pudo obtener la lista de usuarios');
             }
+            const usersInfo = await response.json();
+            console.log('Data received:', usersInfo);
+            users.splice(0, users.length, ...usersInfo); // Actualiza el array reactivo
+            // users.push(...usersInfo)
+
         } catch (error) {
-            console.error('Error fetching user: ', error);
+            console.error('Error fetching users: ', error);
         }
     }
+
+    async function addUser(newUser: User) {
+        try {
+            const response = await fetch('https://localhost:7113/Users', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newUser)
+            });
+
+            if (response.ok) {
+                const createdUser = await response.json();
+                console.log('User added successfully:', createdUser);
+                // Actualizar la lista de usuarios después de agregar el nuevo usuario
+                fetchAll();
+            } else {
+                const errorMessage = await response.text();
+                console.error('Failed to add user:', errorMessage);
+            }
+        } catch (error) {
+            console.error('Error adding user:', error);
+        }
+    }
+
+    async function deleteUser(userId: number) {
+        try {
+          const response = await fetch(`https://localhost:7113/Users/${userId}`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          });
+      
+          if (response.ok) {
+            console.log(`User with ID ${userId} deleted successfully`);
+            // Actualizar la lista de usuarios después de borrar el usuario
+            fetchAll();
+          } else {
+            const errorMessage = await response.text();
+            console.error('Failed to delete user:', errorMessage);
+          }
+        } catch (error) {
+          console.error('Error deleting user:', error);
+        }
+      }
+      
     
     return {
         users,
+        addUser,
+        deleteUser,
         fetchAll
     };
 });
-
-

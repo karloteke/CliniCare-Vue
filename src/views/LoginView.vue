@@ -28,13 +28,8 @@ async function handleLogin() {
 
 async function handleLogout() {
   logout();
-  clearFormData();
 }
 
-function clearFormData() {
-  username.value = '';
-  password.value = '';
-}
 
 </script>
 
