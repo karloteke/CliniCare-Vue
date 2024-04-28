@@ -27,10 +27,9 @@ const adminMenuItems = [
   { text: 'Home', icon: 'mdi-account-multiple', route: '/' }
 ];
 
-const userMenuItems = [
-  { text: 'Pacientes', icon: 'mdi-account', route: '/patients' },
+const userMenuItems = [ 
+  { text: 'Añadir paciente', icon: 'mdi-account', route: '/add-patient' },
   { text: 'Añadir cita', icon: 'mdi-calendar-plus', route: '/add-appointment' }
-  // { text: 'Citas', icon: 'mdi-calendar', route: '/appointments' }
 ];
 </script>
 

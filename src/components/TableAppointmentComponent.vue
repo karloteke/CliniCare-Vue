@@ -6,51 +6,52 @@ const { appointments, deleteAppointment } = useAppointmentStore();
 const router = useRouter();
 
 const handleAddAppointment = () => {
-  // Redirigir a la página de creación de usuario
+  // Redirigir a la página de creación de citas
   router.push('/add-appointment');
 };
 </script>
 
 <template>
   <div class="container">
-  <div class="content">
-    <div class="button-container">
-        <v-btn @click="handleAddAppointment" color="green">
-            <v-icon>mdi-calendar</v-icon> Agregar Cita
-        </v-btn>
-    </div>
-    <div class="table-container">
-      <v-table>
-        <thead>
-            <tr>
-              <th class="text-design">Id</th>
-              <th class="text-design">Fecha de creación</th>
-              <th class="text-design">Área</th>
-              <th class="text-design">Nombre médico</th>
-              <th class="text-design">Fecha cita</th>
-              <th class="text-design">Hora cita</th>
-              <th class="text-design">¿Es Urgente?</th>
-              <th class="text-design">DNI del paciente</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr v-for="appointment in appointments" :key="appointment.id">
-            <td>{{ appointment.id }}</td>
-            <td>{{ appointment.createdAt }}</td>
-            <td>{{ appointment.area }}</td>
-            <td>{{ appointment.medicalName }}</td>
-            <td>{{ appointment.date }}</td>
-            <td>{{ appointment.time }}</td>
-            <td>{{ appointment.isUrgent ? 'Sí' : 'No' }}</td>
-            <td>{{ appointment.patientDni }}</td>
-            <td>
-              <v-icon @click="deleteAppointment(appointment.id)">mdi-delete</v-icon>
-              <!-- <v-icon @click="editUser(user.id)">mdi-pencil</v-icon> -->
-            </td>
-            </tr>
-        </tbody>
-      </v-table>
-     </div>
+    <div class="content">
+      <div class="button-container">
+          <v-btn @click="handleAddAppointment" color="green">
+              <v-icon>mdi-calendar</v-icon> Agregar Cita
+          </v-btn>
+      </div>
+      <div class="table-container">
+        <v-table>
+          <thead>
+              <tr>
+                <th class="text-design">Id</th>
+                <th class="text-design">Fecha de creación</th>
+                <th class="text-design">Área</th>
+                <th class="text-design">Nombre médico</th>
+                <th class="text-design">Fecha cita</th>
+                <th class="text-design">Hora cita</th>
+                <th class="text-design">¿Es Urgente?</th>
+                <th class="text-design">DNI del paciente</th>
+                <th class="text-design">Acciones</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr v-for="appointment in appointments" :key="appointment.id">
+              <td>{{ appointment.id }}</td>
+              <td>{{ appointment.createdAt }}</td>
+              <td>{{ appointment.area }}</td>
+              <td>{{ appointment.medicalName }}</td>
+              <td>{{ appointment.date }}</td>
+              <td>{{ appointment.time }}</td>
+              <td>{{ appointment.isUrgent ? 'Sí' : 'No' }}</td>
+              <td>{{ appointment.patientDni }}</td>
+              <td>
+                <v-icon @click="deleteAppointment(appointment.id)">mdi-delete</v-icon>
+                <!-- <v-icon @click="editUser(user.id)">mdi-pencil</v-icon> -->
+              </td>
+              </tr>
+          </tbody>
+        </v-table>
+      </div>
     </div>
   </div>
 </template>
