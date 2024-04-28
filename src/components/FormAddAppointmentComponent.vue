@@ -42,7 +42,7 @@ const handleSubmit = async () => {
 <template>
  <div class="container-form">
     <v-sheet class="mx-auto" width="300">
-      <h2 class="text-center mb-3">Agregar Nueva Cita</h2>
+      <h2 class="text-center mb-3"> Crear nueva cita</h2>
       <v-form @submit.prevent="handleSubmit">
         <v-text-field
           v-model="appointmentData.area"
@@ -82,7 +82,7 @@ const handleSubmit = async () => {
           required
         ></v-text-field>
 
-        <v-btn class="mt-2" type="submit" block color="green">Guardar cita</v-btn>
+        <v-btn class="mt-2" type="submit" block color="green">Crear cita</v-btn>
       </v-form>
     </v-sheet>
   </div>
@@ -92,7 +92,7 @@ const handleSubmit = async () => {
   <style scoped>
     .container-form{
       padding: 40px;
-      margin-top: 45px;
+      margin-top: 40px;
       display: flex;
       justify-content: center;
     }

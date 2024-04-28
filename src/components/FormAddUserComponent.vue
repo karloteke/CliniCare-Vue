@@ -26,26 +26,23 @@ const handleSubmit = async () => {
       <v-text-field
         v-model="userData.username"
         placeholder="Nombre usuario"
-        :rules="usernameRules"
         required
       ></v-text-field>
 
       <v-text-field
         v-model="userData.email"
         placeholder="Email"
-        :rules="emailRules"
         required
       ></v-text-field>
 
       <v-text-field
         v-model="userData.password"
         placeholder="Contraseña"
-        :rules="passwordRules"
         required
         type="password"
       ></v-text-field>
 
-      <v-btn class="mt-2" type="submit" block color="green">Agregar usuario</v-btn>
+      <v-btn class="mt-2" type="submit" block color="green">Crear usuario</v-btn>
     </v-form>
   </v-sheet>
   </div>
