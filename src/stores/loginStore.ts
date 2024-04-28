@@ -66,7 +66,7 @@ export const useLoginStore = defineStore('login', () => {
         return !!token.value; // Devuelve true si hay un token almacenado, false si no lo hay
     }
 
-    // Función para decodificar un token JWT
+    // Función para decodificar token JWT
     function parseJwt(token: string) {
         try {
             const base64Url = token.split('.')[1];
