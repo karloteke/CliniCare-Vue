@@ -33,15 +33,15 @@ export const useUserStore = defineStore('users', () => {
 
             if (response.ok) {
                 const createdUser = await response.json();
-                console.log('User added successfully:', createdUser);
+                console.log('Usuario añadido satisfactoriamente:', createdUser);
                 // Actualizar la lista de usuarios después de agregar el nuevo usuario
                 fetchAll();
             } else {
                 const errorMessage = await response.text();
-                console.error('Failed to add user:', errorMessage);
+                console.error('Fallo al añadir el usuario:', errorMessage);
             }
         } catch (error) {
-            console.error('Error adding user:', error);
+            console.error('Error al añadir usuario:', error);
         }
     }
 
@@ -55,15 +55,15 @@ export const useUserStore = defineStore('users', () => {
           });
       
           if (response.ok) {
-            console.log(`User with ID ${userId} deleted successfully`);
+            console.log(`Usuario con ID ${userId} borrado satisfactoriamente`);
             // Actualizar la lista de usuarios después de borrar el usuario
             fetchAll();
           } else {
             const errorMessage = await response.text();
-            console.error('Failed to delete user:', errorMessage);
+            console.error('Fallo al borrar el usuario:', errorMessage);
           }
         } catch (error) {
-          console.error('Error deleting user:', error);
+          console.error('Error al borrar el usuario:', error);
         }
       }
       

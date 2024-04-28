@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 import { onMounted } from 'vue';
 import Chart from 'chart.js/auto';
 
@@ -91,4 +91,16 @@ onMounted(() => {
   width: 30%; 
   margin-top: 50px; 
 }
-</style>
+</style> -->
+
+
+<script setup lang="ts">
+import GraphComponent from '@/components/GraphComponent.vue';
+</script>
+
+<template>
+  <div class="home">
+    <GraphComponent></GraphComponent>
+  </div>
+</template>
+

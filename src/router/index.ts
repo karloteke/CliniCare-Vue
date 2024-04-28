@@ -40,8 +40,13 @@ const router = createRouter({
     },
     { 
       path: '/add-user',
-      name: 'addser',
+      name: 'addUser',
       component: () => import('@/views/AddUserView.vue')
+    },
+    { 
+      path: '/add-appointment',
+      name: 'addAppointment',
+      component: () => import('@/views/AddAppointmentView.vue')
     }
   ]
 });
