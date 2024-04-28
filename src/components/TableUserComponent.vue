@@ -38,7 +38,7 @@ const handleAddUser = () => {
                     <td>{{ user.userName }}</td>
                     <td>{{ user.email }}</td>
                     <td>{{ user.role }}</td>
-                    <td>
+                    <td  class="d-flex justify-center align-center">
                       <v-icon @click="deleteUser(user.id)">mdi-delete</v-icon>
                       <!-- <v-icon @click="editUser(user.id)">mdi-pencil</v-icon> -->
                     </td>

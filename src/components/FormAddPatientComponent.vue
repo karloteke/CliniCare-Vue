@@ -29,35 +29,30 @@ const handleSubmit = async () => {
       <v-text-field
         v-model="patientData.name"
         placeholder="Nombre Paciente"
- 
         required
       ></v-text-field>
 
       <v-text-field
         v-model="patientData.lastName"
         placeholder="Apellido"
-
         required
       ></v-text-field>
 
       <v-text-field
         v-model="patientData.address"
         placeholder="Dirección"
-
         required
       ></v-text-field>
 
       <v-text-field
         v-model="patientData.dni"
         placeholder="DNI"
-
         required
       ></v-text-field>
 
       <v-text-field
         v-model="patientData.phone"
         placeholder="Teléfono"
-
         required
       ></v-text-field>
 

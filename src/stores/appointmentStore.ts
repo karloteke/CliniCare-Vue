@@ -43,6 +43,28 @@ export const useAppointmentStore = defineStore('appointments', () => {
         }
     }
 
+    async function fetchAppointmentsForPatients(patientDni: string) {
+        try {
+            const response = await fetch(`https://localhost:7113/Appointments/PublicZone?PatientDni=${patientDni}`, {
+                method: 'GET',
+                headers: {
+                'Content-Type': 'application/json'
+                }
+            });
+          
+            if (response.ok) {
+                const appointmentsByDniInfo = await response.json();
+                console.log('Data received:', appointmentsByDniInfo);
+                appointments.splice(0, appointments.length, ...appointmentsByDniInfo); // Actualiza el array reactivo
+            } else {
+                console.error('Error fetching appointments for patient:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error fetching appointments for patient:', error);
+        }
+    }
+
+
     async function deleteAppointment(appointmentId: number) {
         try {
           const response = await fetch(`https://localhost:7113/Appointments/${appointmentId}`, {
@@ -70,6 +92,7 @@ export const useAppointmentStore = defineStore('appointments', () => {
     return {
         appointments,
         addAppointment,
+        fetchAppointmentsForPatients,
         deleteAppointment,
         fetchAll
     };

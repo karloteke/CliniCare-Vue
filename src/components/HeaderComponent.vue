@@ -20,16 +20,19 @@ const navigateTo = (route: string) => {
 }
 
 const adminMenuItems = [
+  { text: 'Home', icon: 'mdi-account-multiple', route: '/' },
   { text: 'Pacientes', icon: 'mdi-account', route: '/patients' },
   { text: 'Citas', icon: 'mdi-calendar', route: '/appointments' },
   { text: 'Historial médico', icon: 'mdi-file-document', route: '/medicalRecords' },
   { text: 'Usuarios', icon: 'mdi-account-multiple', route: '/users' },
-  { text: 'Home', icon: 'mdi-account-multiple', route: '/' }
+  { text: 'Buscar cita', icon: 'mdi-magnify', route: '/appointment-patient/:dni' }
+  
 ];
 
 const userMenuItems = [ 
   { text: 'Añadir paciente', icon: 'mdi-account', route: '/add-patient' },
-  { text: 'Añadir cita', icon: 'mdi-calendar-plus', route: '/add-appointment' }
+  { text: 'Añadir cita', icon: 'mdi-calendar-plus', route: '/add-appointment' },
+  { text: 'Buscar cita', icon: 'mdi-magnify', route: '/appointment-patient/:dni' }
 ];
 </script>
 
@@ -38,7 +41,7 @@ const userMenuItems = [
   <v-app-bar color="green darken-3" dark>
     <v-app-bar-nav-icon @click.stop="toggleDrawer"></v-app-bar-nav-icon>
     <v-toolbar-title>CliniCare</v-toolbar-title>
-    <v-spacer></v-spacer> <!-- Espaciador -->
+    <v-spacer></v-spacer> 
     <div v-if="isLoggedIn()" class="text-center">
       <v-btn icon @click="logout">
         Cerrar sesión
