@@ -48,7 +48,6 @@ const handleSubmit = async () => {
           v-model="appointmentData.area"
           placeholder="Área"
           required
-          dense
         ></v-text-field>
 
         <v-text-field

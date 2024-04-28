@@ -44,7 +44,7 @@ const handleAddAppointment = () => {
               <td>{{ appointment.time }}</td>
               <td>{{ appointment.isUrgent ? 'Sí' : 'No' }}</td>
               <td>{{ appointment.patientDni }}</td>
-              <td>
+              <td class="d-flex justify-center align-center">
                 <v-icon @click="deleteAppointment(appointment.id)">mdi-delete</v-icon>
                 <!-- <v-icon @click="editUser(user.id)">mdi-pencil</v-icon> -->
               </td>

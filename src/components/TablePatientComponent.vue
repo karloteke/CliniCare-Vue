@@ -42,7 +42,7 @@ const handleAddAppointment = () => {
             <td>{{ patient.address }}</td>
             <td>{{ patient.dni }}</td>
             <td>{{ patient.phone }}</td>
-            <td>
+            <td  class="d-flex justify-center align-center">
                 <v-icon @click="deletePatient(patient.id)">mdi-delete</v-icon>
                 <!-- <v-icon @click="editUser(user.id)">mdi-pencil</v-icon> -->
             </td>
