@@ -20,7 +20,7 @@ const navigateTo = (route: string) => {
 }
 
 const adminMenuItems = [
-  { text: 'Home', icon: 'mdi-account-multiple', route: '/' },
+  { text: 'Inicio', icon: 'mdi-home', route: '/' },
   { text: 'Pacientes', icon: 'mdi-account', route: '/patients' },
   { text: 'Citas', icon: 'mdi-calendar', route: '/appointments' },
   { text: 'Historial médico', icon: 'mdi-file-document', route: '/medicalRecords' },
