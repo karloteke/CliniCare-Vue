@@ -31,7 +31,7 @@ onMounted(() => {
           placeholder="DNI del paciente"
           required
         ></v-text-field>
-        <v-btn type="submit">Buscar</v-btn>
+        <v-btn type="submit" color="green">Buscar</v-btn>
       </v-form>
     </v-sheet>
   </div>
@@ -42,7 +42,7 @@ onMounted(() => {
     display: inline-block;
     padding-left: 30px;
     padding-top: 80px;
-    height: 38vh;
+    height: 33vh;
   }
 </style> 
 

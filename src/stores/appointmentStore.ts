@@ -1,19 +1,34 @@
 import { defineStore } from 'pinia';
 import { reactive } from 'vue';
 import type { Appointment } from '@/core/appointment';
-
+import { useLoginStore } from '@/stores/loginStore';
 
 
 export const useAppointmentStore = defineStore('appointments', () => {
     const appointments = reactive<Appointment[]>([]);
+    const { getRole, getToken } = useLoginStore();
 
     async function fetchAll() {
         try {
-            const response = await fetch('https://localhost:7113/Appointments');
+            const role = getRole();
+            if (role !== 'admin') {
+              throw new Error('No tienes permiso para ver la lista de citas');
+            }
+            const token = getToken();
+            const response = await fetch('https://localhost:7113/Appointments', {
+                headers: {
+                    'Authorization': `Bearer ${token}`, 
+                },
+            });
+            
+            if (!response.ok) {
+              throw new Error('No se pudo obtener la lista de citas');
+            }
+            
             const appointmentsInfo = await response.json();
-
             console.log('Data received:', appointmentsInfo);
             appointments.splice(0, appointments.length, ...appointmentsInfo); // Actualiza el array reactivo
+
         } catch (error) {
             console.error('Error fetching appointment: ', error);
         }
@@ -21,9 +36,11 @@ export const useAppointmentStore = defineStore('appointments', () => {
 
     async function addAppointment(newAppointment: Appointment, patientDni: string) {
         try {
+            const token = getToken();
             const response = await fetch(`https://localhost:7113/Appointments?patientDni=${patientDni}`, {
                 method: 'POST',
                 headers: {
+                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(newAppointment)
@@ -45,10 +62,12 @@ export const useAppointmentStore = defineStore('appointments', () => {
 
     async function fetchAppointmentsForPatients(patientDni: string) {
         try {
+            const token = getToken();
             const response = await fetch(`https://localhost:7113/Appointments/PublicZone?PatientDni=${patientDni}`, {
                 method: 'GET',
                 headers: {
-                'Content-Type': 'application/json'
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
                 }
             });
           
@@ -67,10 +86,12 @@ export const useAppointmentStore = defineStore('appointments', () => {
 
     async function deleteAppointment(appointmentId: number) {
         try {
-          const response = await fetch(`https://localhost:7113/Appointments/${appointmentId}`, {
-            method: 'DELETE',
-            headers: {
-              'Content-Type': 'application/json'
+            const token = getToken();
+            const response = await fetch(`https://localhost:7113/Appointments/${appointmentId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
             }
           });
       
@@ -86,7 +107,6 @@ export const useAppointmentStore = defineStore('appointments', () => {
           console.error('Error al borrar la cita:', error);
         }
       }
-    
     
 
     return {
