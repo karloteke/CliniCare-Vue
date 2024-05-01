@@ -11,7 +11,7 @@ export const useLoginStore = defineStore('login', () => {
 
     async function login(credentials: { userName: string; password: string }) {
         try {
-            const response = await fetch('https://localhost:7113/Auth/login', {
+            const response = await fetch('https://clinicare.azurewebsites.net/Auth/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

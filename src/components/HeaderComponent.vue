@@ -41,15 +41,23 @@ const userMenuItems = [
   <v-app-bar color="green darken-3" dark>
     <v-app-bar-nav-icon @click.stop="toggleDrawer"></v-app-bar-nav-icon>
     <v-toolbar-title>CliniCare</v-toolbar-title>
-    <v-spacer></v-spacer> 
-    <div v-if="isLoggedIn()" class="text-center">
-      <v-btn icon @click="logout">
+    <v-spacer></v-spacer>
+    <div class="button-group">
+      <router-link to="/add-user">
+        <v-btn class="custom-btn" :elevation="3">
+          Añadir usuario
+        </v-btn>
+      </router-link>
+    </div>
+    <div class="spacer"></div>
+    <div v-if="isLoggedIn()">
+      <v-btn @click="logout" class="custom-btn" :elevation="3">
         Cerrar sesión
       </v-btn>
     </div>
-    <div v-else class="text-center">
+    <div v-else>
       <router-link to="/login">
-        <v-btn icon>
+        <v-btn class="custom-btn" :elevation="3">
           Iniciar sesión
         </v-btn>
       </router-link>
@@ -81,5 +89,17 @@ const userMenuItems = [
 
 
 <style scoped>
+/* .button-group {
+  display: flex;
+  align-items: center;
+} */
 
+.custom-btn {
+  margin-left: 50px;
+  color: white; 
+}
+
+.spacer {
+  margin-right: 60px; 
+}
 </style>

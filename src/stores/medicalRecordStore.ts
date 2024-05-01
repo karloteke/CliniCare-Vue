@@ -14,7 +14,7 @@ export const useMedicalRecordStore = defineStore('medicalRecords', () => {
               throw new Error('No tienes permiso para ver el historial médico');
             }
             const token = getToken();
-            const response = await fetch('https://localhost:7113/MedicalRecords', {
+            const response = await fetch('https://clinicare.azurewebsites.net/MedicalRecords', {
               headers: {
                 'Authorization': `Bearer ${token}`, 
               },
