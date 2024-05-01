@@ -15,7 +15,7 @@ export const usePatientStore = defineStore('patients', () => {
               throw new Error('No tienes permiso para ver la lista de usuarios');
           }
           const token = getToken();
-          const response = await fetch('https://localhost:7113/Patients', {
+          const response = await fetch('https://clinicare.azurewebsites.net/Patients', {
               headers: {
                   'Authorization': `Bearer ${token}`, 
               },
@@ -37,7 +37,7 @@ export const usePatientStore = defineStore('patients', () => {
     async function addPatient(newPatient: Patient) {
         try {
             const token = getToken();
-            const response = await fetch('https://localhost:7113/Patients', {
+            const response = await fetch('https://clinicare.azurewebsites.net/Patients', {
                 method: 'POST',
                 headers: {
                   'Authorization': `Bearer ${token}`,
@@ -63,7 +63,7 @@ export const usePatientStore = defineStore('patients', () => {
     async function deletePatient(patientId: number) {
         try {
           const token = getToken();
-          const response = await fetch(`https://localhost:7113/Patients/${patientId}`, {
+          const response = await fetch(`https://clinicare.azurewebsites.net/Patients/${patientId}`, {
             method: 'DELETE',
             headers: {
               'Authorization': `Bearer ${token}`,
