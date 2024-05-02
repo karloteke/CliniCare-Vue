@@ -45,7 +45,7 @@ const userMenuItems = [
     <div class="button-group">
       <router-link to="/add-user">
         <v-btn class="custom-btn" :elevation="3">
-          Añadir usuario
+          Registrarse
         </v-btn>
       </router-link>
     </div>
