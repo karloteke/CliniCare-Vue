@@ -36,9 +36,13 @@ export const useUserStore = defineStore('users', () => {
     
     async function addUser(newUser: User) {
         try {
+            const token = getToken(); 
             const response = await fetch('https://clinicare.azurewebsites.net/Users', {
                 method: 'POST',
-            
+                headers: {
+                  'Authorization': `Bearer ${token}`,
+                  'Content-Type': 'application/json'
+                },
                 body: JSON.stringify(newUser)
             });
 

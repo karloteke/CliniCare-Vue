@@ -15,9 +15,24 @@ const patientData = ref({
 });
 
 const handleSubmit = async () => {
-  await addPatient(patientData.value);
-  patientData.value = { name: '', lastName: '', address: '', dni: '', phone: '' };
-};
+  await addPatient({
+    id: 0, 
+    name: patientData.value.name,
+    lastName: patientData.value.lastName,
+    address: patientData.value.address,
+    dni: patientData.value.dni,
+    phone: patientData.value.phone,
+  });
+  
+  // Limpiar los campos después de agregar el paciente
+  patientData.value = {
+    name: '',
+    lastName: '',
+    address: '',
+    dni: '',
+    phone: ''
+  };
+}
 </script>
 
 
