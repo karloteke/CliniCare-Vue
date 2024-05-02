@@ -26,7 +26,6 @@ export const useLoginStore = defineStore('login', () => {
                 // Decodificar el token JWT para obtener el rol
                 const decodedToken = parseJwt(data.token);
                 const userRole = decodedToken.role;
-
                 role.value = userRole;
 
                 localStorage.setItem('token', data.token);

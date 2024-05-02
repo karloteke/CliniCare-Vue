@@ -12,9 +12,18 @@ const userData = ref({
 });
 
 const handleSubmit = async () => {
-  await addUser(userData.value);
+  const newUser = {
+    id: 0, 
+    userName: userData.value.username,
+    email: userData.value.email,
+    password: userData.value.password,
+    role: 'user' 
+  };
+
+  await addUser(newUser);
   userData.value = { username: '', email: '', password: '' };
 };
+
 </script>
 
 

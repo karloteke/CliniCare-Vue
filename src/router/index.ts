@@ -1,6 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import { createPinia } from 'pinia';
-import { useLoginStore } from '@/stores/loginStore';
 import authGuard from '@/stores/guards'; 
 
 
@@ -11,15 +9,13 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: () => import('@/views/HomeView.vue'), // Usa una función para cargar el componente dinámicamente
-      
+      component: () => import('@/views/HomeView.vue'),
     },
     {
       path: '/patients',
       name: 'patientList',
       component: () => import('@/views/PatientsListView.vue'),
       beforeEnter: authGuard,
-     
     },
     {
       path: '/appointments',
