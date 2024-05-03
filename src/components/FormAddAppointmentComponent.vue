@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// import type { Appointment } from '@/core/appointment';
+
 import { useAppointmentStore } from '@/stores/appointmentStore';
 import { ref } from 'vue';
 
