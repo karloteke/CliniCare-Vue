@@ -5,7 +5,7 @@ import { useRouter } from 'vue-router';
 const { patients, deletePatient } = usePatientStore();
 const router = useRouter();
 
-const handleAddAppointment = () => {
+const handleAddPatient = () => {
   // Redirigir a la página de creación de pacientes
   router.push('/add-patient');
 };
@@ -17,7 +17,7 @@ const handleAddAppointment = () => {
   <div class="container">
     <div class="content">
       <div class="button-container">
-          <v-btn @click="handleAddAppointment" color="green">
+          <v-btn @click="handleAddPatient" color="green">
               <v-icon>mdi-account-plus</v-icon> Agregar Paciente
           </v-btn>
       </div>

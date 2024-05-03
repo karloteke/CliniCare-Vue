@@ -53,6 +53,12 @@ const router = createRouter({
       beforeEnter: authGuard,
     },
     { 
+      path: '/add-medicalRecord',
+      name: 'addMedicalRecord',
+      component: () => import('@/views/AddMedicalRecordView.vue'),
+      beforeEnter: authGuard,
+    },
+    { 
       path: '/add-patient',
       name: 'addPatient',
       component: () => import('@/views/AddPatientView.vue'),

@@ -1,3 +1,4 @@
+
 import { defineStore } from 'pinia';
 import { reactive } from 'vue';
 import type { MedicalRecord } from '@/core/medicalRecord';
@@ -31,9 +32,61 @@ export const useMedicalRecordStore = defineStore('medicalRecords', () => {
             console.error('Error fetching medical records: ', error);
         }
     }
+
+    async function addMedicalRecord(newMedicalRecord: MedicalRecord, patientDni: string) {
+      try {
+          const token = getToken();
+          const response = await fetch(`https://clinicare.azurewebsites.net/MedicalRecords?patientDni=${patientDni}`, {
+              method: 'POST',
+              headers: {
+                'Authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(newMedicalRecord)
+          });
+
+          if (response.ok) {
+              const createdMedicalRecord = await response.json();
+              console.log('Historial médico añadido satisfactoriamente:', createdMedicalRecord);
+             
+              fetchAll();  // Actualizar el historial después de agregar el historial médico
+          } else {
+              const errorMessage = await response.text();
+              console.error('Fallo al añadir el historial médico:', errorMessage);
+          }
+      } catch (error) {
+          console.error('Error al añadir el historial médico:', error);
+      }
+  }
+
+  async function deleteMedicalRecord(medicalRecordId: number) {
+      try {
+        const token = getToken();
+        const response = await fetch(`https://clinicare.azurewebsites.net/MedicalRecords/${medicalRecordId}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+          }
+        });
+    
+        if (response.ok) {
+          console.log(`Historial médico con ID ${medicalRecordId} borrado satisfactoriamente`);
+          fetchAll();
+
+        } else {
+          const errorMessage = await response.text();
+          console.error('Fallo al borrar el historial médico:', errorMessage);
+        }
+      } catch (error) {
+        console.error('Error al borrar el historial médico:', error);
+      }
+    }
     
     return {
         medicalRecords,
+        addMedicalRecord,
+        deleteMedicalRecord,
         fetchAll
     };
 });
