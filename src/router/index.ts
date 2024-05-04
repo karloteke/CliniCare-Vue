@@ -44,7 +44,6 @@ const router = createRouter({
       path: '/add-user',
       name: 'addUser',
       component: () => import('@/views/AddUserView.vue'),
-      beforeEnter: authGuard,
     },
     { 
       path: '/add-appointment',
@@ -67,7 +66,7 @@ const router = createRouter({
     { 
       path: '/appointment-patient/:dni',
       name: 'appointmentPatient',
-      component: () => import('@/views/AppointmentForPatientView.vue'),
+      component: () => import('@/views/AppointmentByDniView.vue'),
       beforeEnter: authGuard,
     }
   ]

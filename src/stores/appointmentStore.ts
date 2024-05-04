@@ -60,7 +60,7 @@ export const useAppointmentStore = defineStore('appointments', () => {
         }
     }
 
-    async function fetchAppointmentsForPatients(patientDni: string) {
+    async function fetchAppointmentsByDni(patientDni: string) {
         try {
             const token = getToken();
             const response = await fetch(`https://clinicare.azurewebsites.net/Appointments/PublicZone?PatientDni=${patientDni}`, {
@@ -112,7 +112,7 @@ export const useAppointmentStore = defineStore('appointments', () => {
     return {
         appointments,
         addAppointment,
-        fetchAppointmentsForPatients,
+        fetchAppointmentsByDni,
         deleteAppointment,
         fetchAll
     };

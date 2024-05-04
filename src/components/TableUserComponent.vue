@@ -1,13 +1,31 @@
 <script setup lang="ts">
 import { useUserStore } from '@/stores/userStore'; 
 import { useRouter } from 'vue-router';
+import { ref, computed } from 'vue';
 
 const { users,  deleteUser } = useUserStore();
 const router = useRouter();
+const pageSize = 5; // Cantidad de usuarios por página
+const currentPage = ref(1);
 
 const handleAddUser = () => {
   // Redirigir a la página de creación de usuario
   router.push('/add-user');
+};
+
+// Calcula el número total de páginas
+const totalPages = computed(() => Math.ceil(users.length / pageSize));
+
+// Función para obtener los usuarios de la página actual
+const paginatedUsers = computed(() => {
+  const startIndex = (currentPage.value - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+  return users.slice(startIndex, endIndex);
+});
+
+// Función para cambiar de página
+const changePage = (page: number) => {
+  currentPage.value = page;
 };
 
 </script>
@@ -33,7 +51,7 @@ const handleAddUser = () => {
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="user in users" :key="user.id">
+                <tr v-for="user in paginatedUsers" :key="user.id">
                     <td>{{ user.id }}</td>
                     <td>{{ user.userName }}</td>
                     <td>{{ user.email }}</td>
@@ -45,6 +63,13 @@ const handleAddUser = () => {
                 </tr>
             </tbody>
         </v-table>
+        <div class="pagination-container">
+          <v-pagination
+              v-model="currentPage"
+              :length="totalPages"
+              @input="changePage"
+            ></v-pagination>
+      </div>
       </div>
     </div>
   </div>
@@ -74,6 +99,10 @@ const handleAddUser = () => {
     font-weight: bold;
     color: green;
     font-size: 20px;
+  }
+
+  .pagination-container {
+    margin-top: 20px;
   }
 </style>
   

@@ -1,24 +1,26 @@
 <script setup lang="ts">
-
 import { useAppointmentStore } from '@/stores/appointmentStore';
 import { ref } from 'vue';
 
+const successAlert = ref(false); 
 const { addAppointment } = useAppointmentStore();
-
 
 const appointmentData = ref({
   area: '',
   medicalName: '',
   date: '',
   time: '',
-  isUrgent: false
+  isUrgent: false,
 });
 
 let patientDni = '';
 const handleSubmit = async () => {
-  // Formatea la fecha con el formato del backend
+  if (!appointmentData.value.area || !appointmentData.value.medicalName || !appointmentData.value.date || !appointmentData.value.time || !patientDni) {
+    alert('Por favor, complete todos los campos.');
+    return; 
+  }
+
   const formattedDate = new Date(appointmentData.value.date).toLocaleDateString('en-GB');
-  //Formatea la hora con el formato del backend
   const timeParts = appointmentData.value.time.split(':');
   const formattedTime = `${timeParts[0].padStart(2, '0')}:${timeParts[1].padStart(2, '0')}`;
 
@@ -28,13 +30,21 @@ const handleSubmit = async () => {
     area: appointmentData.value.area,
     medicalName: appointmentData.value.medicalName,
     date: formattedDate,
-    time: formattedTime,//appointmentData.value.time,
+    time: formattedTime,
     isUrgent: appointmentData.value.isUrgent,
-    patientDni: patientDni //Pasamos Dni paciente a la cita
+    patientDni: patientDni 
   };
 
-  await addAppointment(appointment, patientDni); // Pasarle el Dni del paciente a la cita
-  appointmentData.value = { area: '', medicalName: '', date: '', time: '', isUrgent: false }; // Limpiar los datos del formulario
+  await addAppointment(appointment, patientDni); 
+  appointmentData.value = { area: '', medicalName: '', date: '', time: '', isUrgent: false };
+  
+  // Mostrar el alerta de éxito
+  successAlert.value = true;
+
+  // Ocultar el alerta en 2 segundos
+  setTimeout(() => {
+    successAlert.value = false;
+  }, 2000);
 };
 
 </script>
@@ -81,10 +91,15 @@ const handleSubmit = async () => {
           required
         ></v-text-field>
 
-        <v-btn class="mt-2" type="submit" block color="green">Crear cita</v-btn>
+        <v-btn class="mt-2" type="submit" block color="black">Crear cita</v-btn>
       </v-form>
     </v-sheet>
   </div>
+
+  <!-- Componente v-alert para mostrar mensaje de éxito -->
+  <v-alert v-if="successAlert" v-model="successAlert" type="success" dismissible style="max-width: 300px;">
+      Cita creada correctamente.
+  </v-alert>
   </template>
   
     
@@ -94,5 +109,12 @@ const handleSubmit = async () => {
       margin-top: 40px;
       display: flex;
       justify-content: center;
+    }
+
+    .v-alert {
+      position: absolute;
+      top: 50%;
+      left: 50%; 
+      transform: translate(-50%, -50%); 
     }
   </style> 

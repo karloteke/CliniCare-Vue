@@ -2,6 +2,7 @@
 import { useMedicalRecordStore } from '@/stores/medicalRecordStore';
 import { ref } from 'vue';
 
+const successAlert = ref(false); 
 const { addMedicalRecord } = useMedicalRecordStore();
 
 const medicalRecordData = ref({
@@ -9,10 +10,15 @@ const medicalRecordData = ref({
   treatment: '',
   treatmentCost: 0,
   notes: '',
-  patientDni: ''
 });
 
+let patientDni = '';
 const handleSubmit = async () => {
+  if (!medicalRecordData.value.doctorName || !medicalRecordData.value.treatment || !medicalRecordData.value.treatmentCost || !medicalRecordData.value.notes || !patientDni) {
+    alert('Por favor, complete todos los campos.');
+    return; 
+  }
+
   const medicalRecord = {
     id: 0,
     createdAt: new Date().toISOString(),
@@ -20,18 +26,22 @@ const handleSubmit = async () => {
     treatment: medicalRecordData.value.treatment,
     treatmentCost: medicalRecordData.value.treatmentCost,
     notes: medicalRecordData.value.notes,
-    patientDni: medicalRecordData.value.patientDni
+    patientDni: patientDni
   };
 
-  await addMedicalRecord(medicalRecord, medicalRecordData.value.patientDni);
-  medicalRecordData.value = {
-    doctorName: '',
-    treatment: '',
-    treatmentCost: 0,
-    notes: '',
-    patientDni: ''
-  };
+  await addMedicalRecord(medicalRecord, patientDni);
+  medicalRecordData.value = {doctorName: '',treatment: '',treatmentCost: 0,notes: '',};
+
+  // Mostrar el alerta de éxito
+  successAlert.value = true;
+
+  // Ocultar el alerta en 2 segundos
+  setTimeout(() => {
+    successAlert.value = false;
+  }, 2000);
 };
+
+
 </script>
 
 <template>
@@ -64,15 +74,20 @@ const handleSubmit = async () => {
         ></v-textarea>
 
         <v-text-field
-          v-model="medicalRecordData.patientDni"
+          v-model="patientDni"
           placeholder="DNI del paciente"
           required
         ></v-text-field>
 
-        <v-btn class="mt-2" type="submit" block color="green">Agregar registro</v-btn>
+        <v-btn class="mt-2" type="submit" block color="black">Agregar registro</v-btn>
       </v-form>
     </v-sheet>
   </div>
+
+  <!-- Componente v-alert para mostrar mensaje de éxito -->
+  <v-alert v-model="successAlert" type="success" dismissible style="max-width: 300px;">
+      Historial médico creado correctamente.
+  </v-alert>
 </template>
 
 <style scoped>
@@ -81,5 +96,12 @@ const handleSubmit = async () => {
   margin-top: 40px;
   display: flex;
   justify-content: center;
+}
+
+.v-alert {
+  position: absolute;
+  top: 50%;
+  left: 50%; 
+  transform: translate(-50%, -50%); 
 }
 </style>

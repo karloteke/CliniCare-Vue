@@ -2,14 +2,14 @@
 import { useAppointmentStore } from '@/stores/appointmentStore';
 import { ref, onMounted } from 'vue';
 
-const { fetchAppointmentsForPatients } = useAppointmentStore();
+const { fetchAppointmentsByDni } = useAppointmentStore();
 const { appointments } = useAppointmentStore();
 const patientDni = ref('');
 
 
 const handleSearch = async () => { 
   if (patientDni.value.trim() !== '') {
-    await fetchAppointmentsForPatients(patientDni.value); 
+    await fetchAppointmentsByDni(patientDni.value); 
   } else {
     alert('Por favor, ingrese el DNI del paciente');
   }

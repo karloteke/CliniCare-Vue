@@ -49,7 +49,7 @@ export const usePatientStore = defineStore('patients', () => {
             if (response.ok) {
                 const createdPatient = await response.json();
                 console.log('Paciente añadido satisfactoriamente:', createdPatient);
-               
+                
                 fetchAll();  // Actualizar la lista de pacientes después de agregar el nuevo usuario
             } else {
                 const errorMessage = await response.text();
@@ -84,11 +84,16 @@ export const usePatientStore = defineStore('patients', () => {
         }
       }
 
+    function findPatientByDni(dni: string) {
+      return patients.find(patient => patient.dni === dni);
+    }
+
     return {
         patients,
         addPatient,
         deletePatient,
-        fetchAll
+        fetchAll,
+        findPatientByDni
     };
 });
 
