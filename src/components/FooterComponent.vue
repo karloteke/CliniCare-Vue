@@ -12,15 +12,13 @@
   
 
 <style scoped>
-
   .footer-container{
     position: fixed;
     bottom: 0;
     width: 100%;
     text-align: center;
  
-  }
-  
+  } 
 </style>
 
 

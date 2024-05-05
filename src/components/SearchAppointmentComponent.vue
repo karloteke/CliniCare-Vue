@@ -18,7 +18,6 @@ const handleSearch = async () => {
 onMounted(() => {
   appointments.length = 0; 
 });
-
 </script>
 
 
@@ -35,7 +34,7 @@ onMounted(() => {
       </v-form>
     </v-sheet>
   </div>
-  </template>
+</template>
 
 <style scoped>
   .container-form{

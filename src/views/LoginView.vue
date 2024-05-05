@@ -29,9 +29,8 @@ async function handleLogin() {
 async function handleLogout() {
   logout();
 }
-
-
 </script>
+
 
 <template>
   <v-container fluid class="login-container">

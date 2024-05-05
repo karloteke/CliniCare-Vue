@@ -35,14 +35,12 @@ const handleSubmit = async () => {
   // Mostrar el alerta de éxito
   successAlert.value = true;
 
-  // Ocultar el alerta en 2 segundos
   setTimeout(() => {
     successAlert.value = false;
   }, 2000);
 };
-
-
 </script>
+
 
 <template>
   <div class="container-form">
@@ -84,11 +82,12 @@ const handleSubmit = async () => {
     </v-sheet>
   </div>
 
-  <!-- Componente v-alert para mostrar mensaje de éxito -->
+  <!-- v-alert para mostrar mensaje de éxito -->
   <v-alert v-model="successAlert" type="success" dismissible style="max-width: 300px;">
       Historial médico creado correctamente.
   </v-alert>
 </template>
+
 
 <style scoped>
 .container-form {

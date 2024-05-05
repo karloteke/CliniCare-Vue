@@ -89,10 +89,6 @@ const userMenuItems = [
 
 
 <style scoped>
-/* .button-group {
-  display: flex;
-  align-items: center;
-} */
 
 .custom-btn {
   margin-left: 50px;

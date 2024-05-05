@@ -16,7 +16,7 @@ const patientData = ref({
 
 const handleSubmit = async () => {
   if (!patientData.value.name || !patientData.value.lastName || !patientData.value.address || !patientData.value.dni || !patientData.value.phone) {
-    alert('Los campos no pueden estar vacios.');
+    alert('Por favor, complete todos los campos.');
     return; 
   }
 
@@ -41,12 +41,10 @@ const handleSubmit = async () => {
   // Mostrar el alerta de éxito
   successAlert.value = true;
 
-  // Ocultar el alerta en 2 segundos
   setTimeout(() => {
     successAlert.value = false;
   }, 2000);
 };
-
 </script>
 
 
@@ -90,14 +88,13 @@ const handleSubmit = async () => {
   </v-sheet>
   </div>
 
-   <!-- Componente v-alert para mostrar mensaje de éxito -->
+   <!-- v-alert para mostrar mensaje de éxito -->
    <v-alert v-model="successAlert" type="success" dismissible style="max-width: 300px;">
       Paciente creado correctamente.
   </v-alert>
-
 </template>
 
-  
+
 <style scoped>
   .container-form{
     padding: 40px;

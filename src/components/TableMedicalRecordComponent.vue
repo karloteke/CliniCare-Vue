@@ -26,8 +26,8 @@ const paginatedMedicalRecords = computed(() => {
 const changePage = (page: number) => {
   currentPage.value = page;
 };
-
 </script>
+
 
 <template>
   <div class="container">
@@ -61,7 +61,6 @@ const changePage = (page: number) => {
             <td class="text-center">{{ medicalRecord.patientDni }}</td>
             <td class="d-flex justify-center align-center">
               <v-icon @click="deleteMedicalRecord(medicalRecord.id)">mdi-delete</v-icon>
-              <!-- <v-icon @click="editUser(user.id)">mdi-pencil</v-icon> -->
             </td>
           </tr>
         </tbody>

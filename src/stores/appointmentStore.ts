@@ -49,7 +49,7 @@ export const useAppointmentStore = defineStore('appointments', () => {
             if (response.ok) {
                 const createdAppointment = await response.json();
                 console.log('Cita añadida correctamente:', createdAppointment);
-                // Actualizar la lista de citas después de agregar la nueva cita
+              
                 fetchAll();
             } else {
                 const errorMessage = await response.text();
@@ -97,7 +97,7 @@ export const useAppointmentStore = defineStore('appointments', () => {
       
           if (response.ok) {
             console.log(`Cita con Id ${appointmentId} borrada correctamente`);
-            // Actualizar la lista de citas después de borrar el usuario
+   
             fetchAll();
           } else {
             const errorMessage = await response.text();
