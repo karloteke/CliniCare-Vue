@@ -3,26 +3,48 @@ import { ref } from 'vue';
 import { useUserStore } from '@/stores/userStore';
 
 
-const { addUser } = useUserStore();
+const successAlert = ref(false); 
+const { addUser, findUserName } = useUserStore();
 
 const userData = ref({
-  username: '',
+  userName: '',
   email: '',
   password: ''
 });
 
 const handleSubmit = async () => {
+  if (!userData.value.userName || !userData.value.email || !userData.value.password) {
+    alert('Los campos no pueden estar vacios.');
+    return; 
+  }
+
+  const existingUserName = findUserName(userData.value.userName);
+  if ( existingUserName) {
+    alert('Ese nombre de usuario ya existe.');
+    return; 
+  }
+
   const newUser = {
     id: 0, 
-    userName: userData.value.username,
+    userName: userData.value.userName,
     email: userData.value.email,
     password: userData.value.password,
     role: 'user' 
   };
+  
 
   await addUser(newUser);
-  userData.value = { username: '', email: '', password: '' };
-};
+  userData.value = { userName: '', email: '', password: '' };
+
+   // Mostrar el alerta de éxito
+   successAlert.value = true;
+
+    // Ocultar el alerta en 2 segundos
+    setTimeout(() => {
+      successAlert.value = false;
+    }, 2000);
+  };
+  
 
 </script>
 
@@ -33,7 +55,7 @@ const handleSubmit = async () => {
     <h2 class="text-center mb-4">Crear Nuevo Usuario</h2>
     <v-form @submit.prevent="handleSubmit">
       <v-text-field
-        v-model="userData.username"
+        v-model="userData.userName"
         placeholder="Nombre usuario"
         required
       ></v-text-field>
@@ -51,10 +73,15 @@ const handleSubmit = async () => {
         type="password"
       ></v-text-field>
 
-      <v-btn class="mt-2" type="submit" block color="green">Crear usuario</v-btn>
+      <v-btn class="mt-2" type="submit" block color="black">Crear usuario</v-btn>
     </v-form>
   </v-sheet>
   </div>
+
+  <!-- Componente v-alert para mostrar mensaje de éxito -->
+  <v-alert v-model="successAlert" type="success" dismissible style="max-width: 300px;">
+      Usuario creado correctamente.
+  </v-alert>
 
 </template>
 
@@ -66,4 +93,11 @@ const handleSubmit = async () => {
     display: flex;
     justify-content: center;
   }
+
+  .v-alert {
+    position: absolute;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+}
 </style> 

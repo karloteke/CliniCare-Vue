@@ -1,16 +1,32 @@
 <script setup lang = "ts">
 import { usePatientStore } from '@/stores/patientStore'; 
 import { useRouter } from 'vue-router';
+import { ref, computed } from 'vue';
 
 const { patients, deletePatient } = usePatientStore();
 const router = useRouter();
+const pageSize = 5; // Cantidad de pacientes por página
+const currentPage = ref(1);
 
 const handleAddPatient = () => {
-  // Redirigir a la página de creación de pacientes
   router.push('/add-patient');
 };
-</script>
 
+// Calcula el número total de páginas
+const totalPages = computed(() => Math.ceil(patients.length / pageSize));
+
+// Función para obtener los pacientes de la página actual
+const paginatedPatients = computed(() => {
+  const startIndex = (currentPage.value - 1) * pageSize;
+  const endIndex = startIndex + pageSize;
+  return patients.slice(startIndex, endIndex);
+});
+
+// Función para cambiar de página
+const changePage = (page: number) => {
+  currentPage.value = page;
+};
+</script>
 
 
 <template>
@@ -35,7 +51,7 @@ const handleAddPatient = () => {
           </tr>
         </thead>
         <tbody>
-          <tr v-for="patient in patients" :key="patient.id">
+          <tr v-for="patient in paginatedPatients" :key="patient.id">
             <td>{{ patient.id }}</td>
             <td>{{ patient.name }}</td>
             <td>{{ patient.lastName }}</td>
@@ -49,8 +65,15 @@ const handleAddPatient = () => {
           </tr>
         </tbody>
       </v-table>
+      <div class="pagination-container">
+        <v-pagination
+            v-model="currentPage"
+            :length="totalPages"
+            @input="changePage"
+          ></v-pagination>
+      </div>
     </div>
-  </div>
+   </div>
   </div>
 </template>
 
@@ -77,6 +100,10 @@ const handleAddPatient = () => {
     font-weight: bold;
     color: green;
     font-size: 20px;
+  }
+
+  .pagination-container {
+    margin-top: 20px;
   }
 </style>
 

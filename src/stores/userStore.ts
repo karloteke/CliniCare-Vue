@@ -73,7 +73,7 @@ export const useUserStore = defineStore('users', () => {
       
           if (response.ok) {
             console.log(`Usuario con ID ${userId} borrado satisfactoriamente`);
-            // Actualizar la lista de usuarios después de borrar el usuario
+           
             fetchAll();
           } else {
             const errorMessage = await response.text();
@@ -83,6 +83,10 @@ export const useUserStore = defineStore('users', () => {
           console.error('Error al borrar el usuario:', error);
         }
       }
+
+      function findUserName(userName: string) {
+        return users.find(user => user.userName === userName);
+      }
       
     
     return {
@@ -90,6 +94,7 @@ export const useUserStore = defineStore('users', () => {
         addUser,
         deleteUser,
         fetchAll,
-        getRole
+        getRole,
+        findUserName
     };
 });
