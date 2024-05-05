@@ -27,7 +27,6 @@ const paginatedUsers = computed(() => {
 const changePage = (page: number) => {
   currentPage.value = page;
 };
-
 </script>
 
 
@@ -58,7 +57,6 @@ const changePage = (page: number) => {
                     <td>{{ user.role }}</td>
                     <td  class="d-flex justify-center align-center">
                       <v-icon @click="deleteUser(user.id)">mdi-delete</v-icon>
-                      <!-- <v-icon @click="editUser(user.id)">mdi-pencil</v-icon> -->
                     </td>
                 </tr>
             </tbody>

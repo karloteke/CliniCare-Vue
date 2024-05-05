@@ -60,7 +60,6 @@ const changePage = (page: number) => {
             <td>{{ patient.phone }}</td>
             <td  class="d-flex justify-center align-center">
                 <v-icon @click="deletePatient(patient.id)">mdi-delete</v-icon>
-                <!-- <v-icon @click="editUser(user.id)">mdi-pencil</v-icon> -->
             </td>
           </tr>
         </tbody>

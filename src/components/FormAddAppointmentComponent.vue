@@ -24,6 +24,7 @@ const handleSubmit = async () => {
   const timeParts = appointmentData.value.time.split(':');
   const formattedTime = `${timeParts[0].padStart(2, '0')}:${timeParts[1].padStart(2, '0')}`;
 
+
   const appointment = {
     id: 0, 
     createdAt: new Date().toISOString(), 
@@ -41,13 +42,12 @@ const handleSubmit = async () => {
   // Mostrar el alerta de éxito
   successAlert.value = true;
 
-  // Ocultar el alerta en 2 segundos
   setTimeout(() => {
     successAlert.value = false;
   }, 2000);
 };
-
 </script>
+
 
 <template>
  <div class="container-form">
@@ -96,7 +96,7 @@ const handleSubmit = async () => {
     </v-sheet>
   </div>
 
-  <!-- Componente v-alert para mostrar mensaje de éxito -->
+  <!-- v-alert para mostrar mensaje de éxito -->
   <v-alert v-if="successAlert" v-model="successAlert" type="success" dismissible style="max-width: 300px;">
       Cita creada correctamente.
   </v-alert>

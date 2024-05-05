@@ -14,7 +14,7 @@ onMounted(async () => {
   drawChart(appointments.value);
 });
 
-function drawChart(appointments: Appointment[]) { // Especifica el tipo de appointments como Appointment[]
+function drawChart(appointments: Appointment[]) { 
   const appointmentsCount = appointments.length;
   const ctx = document.getElementById('appointmentChart') as HTMLCanvasElement; // Realiza un casting a HTMLCanvasElement
   if (ctx) {
@@ -51,6 +51,7 @@ function drawChart(appointments: Appointment[]) { // Especifica el tipo de appoi
 }
 </script>
 
+
 <template>
   <div class="home">
     <div class>
@@ -64,18 +65,20 @@ function drawChart(appointments: Appointment[]) { // Especifica el tipo de appoi
 
 
 <style scoped>
-.home {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  color: green;
-}
+  .home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    color: green;
+  }
 
-.chart-container {
-  width: 30%;
-  margin-top: 50px;
-}
+  .chart-container {
+    width: 30%;
+    margin-top: 50px;
+  }
 </style>
+
+
 
