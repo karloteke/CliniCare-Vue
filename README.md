@@ -49,10 +49,14 @@ npm run dev
 npm run build
 ```
 
-### Levantar Docker
+# Instrucciones de ejecución en un contenedor Docker
 
-```sh
-docker run -d -p 8082:80 carlota36/clinicare-vue:1.0
-```
-
+### Descarga la imagen del contenedor desde Docker Hub
+  ```sh 
+  docker pull carlota36/clinicare-vue:1.0
+  ```
+### Ejecuta el contenedor
+  ```sh
+  docker run -d -p 8082:80 carlota36/clinicare-vue:1.0
+  ```
 
