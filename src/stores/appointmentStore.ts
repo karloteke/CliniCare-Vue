@@ -15,7 +15,7 @@ export const useAppointmentStore = defineStore('appointments', () => {
               throw new Error('No tienes permiso para ver la lista de citas');
             }
             const token = getToken();
-            const response = await fetch('https://clinicare.azurewebsites.net/Appointments', {
+            const response = await fetch('https://localhost:7113/Appointments', {
                 headers: {
                     'Authorization': `Bearer ${token}`, 
                 },
@@ -37,7 +37,7 @@ export const useAppointmentStore = defineStore('appointments', () => {
     async function addAppointment(newAppointment: Appointment, patientDni: string) {
         try {
             const token = getToken();
-            const response = await fetch(`https://clinicare.azurewebsites.net/Appointments?patientDni=${patientDni}`, {
+            const response = await fetch(`https://localhost:7113/Appointments?patientDni=${patientDni}`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -63,7 +63,7 @@ export const useAppointmentStore = defineStore('appointments', () => {
     async function fetchAppointmentsByDni(patientDni: string) {
         try {
             const token = getToken();
-            const response = await fetch(`https://clinicare.azurewebsites.net/Appointments/PublicZone?PatientDni=${patientDni}`, {
+            const response = await fetch(`https://localhost:7113/Appointments/PublicZone?PatientDni=${patientDni}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -87,7 +87,7 @@ export const useAppointmentStore = defineStore('appointments', () => {
     async function deleteAppointment(appointmentId: number) {
         try {
             const token = getToken();
-            const response = await fetch(`https://clinicare.azurewebsites.net/Appointments/${appointmentId}`, {
+            const response = await fetch(`https://localhost:7113/Appointments/${appointmentId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`,

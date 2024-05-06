@@ -40,9 +40,10 @@ function drawChart(appointments: Appointment[]) {
             display: true,
             text: 'Número total de citas registradas',
             font: {
-              size: 16,
+              size: 18,
               weight: 'bold'
-            }
+            },
+            padding: 25
           }
         }
       }
@@ -58,7 +59,7 @@ function drawChart(appointments: Appointment[]) {
       <h1>Bienvenido a CliniCare</h1>
     </div>
     <div class="chart-container">
-      <canvas id="appointmentChart"></canvas>
+      <canvas id="appointmentChart" style="width: 1000px; height: 800px;"></canvas>
     </div>
   </div>
 </template>
