@@ -15,7 +15,7 @@ export const useMedicalRecordStore = defineStore('medicalRecords', () => {
               throw new Error('No tienes permiso para ver el historial médico');
             }
             const token = getToken();
-            const response = await fetch('https://clinicare.azurewebsites.net/MedicalRecords', {
+            const response = await fetch('https://localhost:7113/MedicalRecords', {
               headers: {
                 'Authorization': `Bearer ${token}`, 
               },
@@ -36,7 +36,7 @@ export const useMedicalRecordStore = defineStore('medicalRecords', () => {
     async function addMedicalRecord(newMedicalRecord: MedicalRecord, patientDni: string) {
       try {
           const token = getToken();
-          const response = await fetch(`https://clinicare.azurewebsites.net/MedicalRecords?patientDni=${patientDni}`, {
+          const response = await fetch(`https://localhost:7113/MedicalRecords?patientDni=${patientDni}`, {
               method: 'POST',
               headers: {
                 'Authorization': `Bearer ${token}`,
@@ -62,7 +62,7 @@ export const useMedicalRecordStore = defineStore('medicalRecords', () => {
   async function deleteMedicalRecord(medicalRecordId: number) {
       try {
         const token = getToken();
-        const response = await fetch(`https://clinicare.azurewebsites.net/MedicalRecords/${medicalRecordId}`, {
+        const response = await fetch(`https://localhost:7113/MedicalRecords/${medicalRecordId}`, {
           method: 'DELETE',
           headers: {
             'Authorization': `Bearer ${token}`,
