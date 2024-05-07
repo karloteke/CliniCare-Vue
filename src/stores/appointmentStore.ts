@@ -63,7 +63,7 @@ export const useAppointmentStore = defineStore('appointments', () => {
     async function fetchAppointmentsByDni(patientDni: string) {
         try {
             const token = getToken();
-            const response = await fetch(`https://localhost:7113/Appointments/PublicZone?PatientDni=${patientDni}`, {
+            const response = await fetch(`https://localhost:7113/Appointments/SearchByDni?PatientDni=${patientDni}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
