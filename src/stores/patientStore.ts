@@ -3,7 +3,7 @@ import { reactive } from 'vue';
 import type { Patient } from '@/core/patient';
 import { useLoginStore } from '@/stores/loginStore';
 
-export const usePatientStore = defineStore('patients', () => {
+export const usePatientStore = defineStore('patient', () => {
     const patients = reactive<Patient[]>([]);
     const { getRole, getToken } = useLoginStore();
 
@@ -15,7 +15,7 @@ export const usePatientStore = defineStore('patients', () => {
               throw new Error('No tienes permiso para ver la lista de usuarios');
           }
           const token = getToken();
-          const response = await fetch('https://localhost:7113/Patients', {
+          const response = await fetch('https://localhost:7113/Patient', {
               headers: {
                   'Authorization': `Bearer ${token}`, 
               },
@@ -37,7 +37,7 @@ export const usePatientStore = defineStore('patients', () => {
     async function addPatient(newPatient: Patient) {
         try {
             const token = getToken();
-            const response = await fetch('https://localhost:7113/Patients', {
+            const response = await fetch('https://localhost:7113/Patient', {
                 method: 'POST',
                 headers: {
                   'Authorization': `Bearer ${token}`,
@@ -63,7 +63,7 @@ export const usePatientStore = defineStore('patients', () => {
     async function deletePatient(patientId: number) {
         try {
           const token = getToken();
-          const response = await fetch(`https://localhost:7113/Patients/${patientId}`, {
+          const response = await fetch(`https://localhost:7113/Patient/${patientId}`, {
             method: 'DELETE',
             headers: {
               'Authorization': `Bearer ${token}`,
