@@ -4,7 +4,7 @@ import type { Appointment } from '@/core/appointment';
 import { useLoginStore } from '@/stores/loginStore';
 
 
-export const useAppointmentStore = defineStore('appointments', () => {
+export const useAppointmentStore = defineStore('appointment', () => {
     const appointments = reactive<Appointment[]>([]);
     const { getRole, getToken } = useLoginStore();
 
@@ -15,7 +15,7 @@ export const useAppointmentStore = defineStore('appointments', () => {
               throw new Error('No tienes permiso para ver la lista de citas');
             }
             const token = getToken();
-            const response = await fetch('https://localhost:7113/Appointments', {
+            const response = await fetch('https://localhost:7113/Appointment', {
                 headers: {
                     'Authorization': `Bearer ${token}`, 
                 },
@@ -37,7 +37,7 @@ export const useAppointmentStore = defineStore('appointments', () => {
     async function addAppointment(newAppointment: Appointment, patientDni: string) {
         try {
             const token = getToken();
-            const response = await fetch(`https://localhost:7113/Appointments?patientDni=${patientDni}`, {
+            const response = await fetch(`https://localhost:7113/Appointment?patientDni=${patientDni}`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -63,7 +63,7 @@ export const useAppointmentStore = defineStore('appointments', () => {
     async function fetchAppointmentsByDni(patientDni: string) {
         try {
             const token = getToken();
-            const response = await fetch(`https://localhost:7113/Appointments/SearchByDni?PatientDni=${patientDni}`, {
+            const response = await fetch(`https://localhost:7113/Appointment/SearchByDni?PatientDni=${patientDni}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Bearer ${token}`,
@@ -87,7 +87,7 @@ export const useAppointmentStore = defineStore('appointments', () => {
     async function deleteAppointment(appointmentId: number) {
         try {
             const token = getToken();
-            const response = await fetch(`https://localhost:7113/Appointments/${appointmentId}`, {
+            const response = await fetch(`https://localhost:7113/Appointment/${appointmentId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`,
